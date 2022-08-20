@@ -1,5 +1,5 @@
 diff --git a/arch/arm64/boot/dts/rockchip/rk3399-rg552.dts b/arch/arm64/boot/dts/rockchip/rk3399-rg552.dts
-index 7de684ed1edc..4e72b428ba5d 100644
+index 7de684ed1edc..fb94623cf906 100644
 --- a/arch/arm64/boot/dts/rockchip/rk3399-rg552.dts
 +++ b/arch/arm64/boot/dts/rockchip/rk3399-rg552.dts
 @@ -93,7 +93,7 @@ adcmux: adc-mux {
@@ -110,7 +110,7 @@ index 7de684ed1edc..4e72b428ba5d 100644
  		fan-supply = <&vcc5v0_sys>;
  	};
  
-@@ -446,34 +446,90 @@ vcc_wifi: vcc-wifi-regulator {
+@@ -446,31 +446,87 @@ vcc_wifi: vcc-wifi-regulator {
  		regulator-always-on;
  		regulator-boot-on;
  	};
@@ -198,12 +198,7 @@ index 7de684ed1edc..4e72b428ba5d 100644
 +			type = "active";
 +		};
 +	};
- 
--                map3 {
--                        trip = <&cpu_hot>;
--                        cooling-device = <&fan 2 THERMAL_NO_LIMIT>;
--                };
--        };
++
 +	cooling-maps {
 +		map1 {
 +			trip = <&cpu_warm>;
@@ -214,16 +209,47 @@ index 7de684ed1edc..4e72b428ba5d 100644
 +			trip = <&cpu_hot>;
 +			cooling-device = <&fan THERMAL_NO_LIMIT 1>;
 +		};
-+
-+		map3 {
-+			trip = <&cpu_scalding>;
-+			cooling-device = <&fan 2 THERMAL_NO_LIMIT>;
-+		};
-+	};
+ 
+                 map3 {
+-                        trip = <&cpu_hot>;
++                        trip = <&cpu_scalding>;
+                         cooling-device = <&fan 2 THERMAL_NO_LIMIT>;
+                 };
+         };
+@@ -505,43 +561,35 @@ &saradc {
  };
  
- &cpu_l0 {
-@@ -528,20 +584,15 @@ &sdio0 {
+ &sdio0 {
+-	clock-frequency = <50000000>;
+-	max-frequency = <50000000>;
++	clock-frequency = <150000000>;
++	clock-freq-min-max = <100000 150000000>;
++	supports-sd;
++	no-sdio;
+ 	bus-width = <4>;
++	disable-wp;
+ 	cap-sd-highspeed;
+ 	cap-sdio-irq;
+-	disable-wp;
+-	supports-sdio;
+-	supports-sd;
+ 	keep-power-in-suspend;
+-	cd-gpios = <&gpio2 RK_PC1 GPIO_ACTIVE_LOW>;
+-	card-detect-delay = <800>; // is it really needed?
++	card-detect-delay = <800>;
++	cd-gpios = <&gpio2 RK_PC1 GPIO_ACTIVE_LOW>; /*[> CD GPIO <]*/
+ 	num-slots = <1>;
+-	vqmmc-supply = <&vcc3v0_touch>;
+ 	pinctrl-names = "default";
+-	pinctrl-0 = <&sdio0_bus4 &sdio0_cmd &sdio0_clk>;
+-	sd-uhs-sdr12;
+-	sd-uhs-sdr25;
+-	sd-uhs-sdr50;
+-	sd-uhs-sdr104;  // TODO: make sure it works at those speeds
++	pinctrl-0 = <&sdio0_clk &sdio0_cmd &sdio0_cd &sdio0_bus4>;
++	sd-uhs-sdr104;
++	vqmmc-supply = <&vcc3v0_touch>;
+ 	status = "okay";
  };
  
  &sdmmc {
@@ -253,7 +279,16 @@ index 7de684ed1edc..4e72b428ba5d 100644
  	status = "okay";
  };
  
-@@ -851,6 +902,7 @@ vdd_gpu: regulator@41 {
+@@ -755,7 +803,7 @@ vcc_sdio: LDO_REG4 {
+ 				regulator-always-on;
+ 				regulator-boot-on;
+ 				regulator-min-microvolt = <1800000>;
+-				regulator-max-microvolt = <3000000>;
++				regulator-max-microvolt = <3300000>;
+ 				regulator-state-mem {
+ 					regulator-on-in-suspend;
+ 					regulator-suspend-microvolt = <3000000>;
+@@ -851,6 +899,7 @@ vdd_gpu: regulator@41 {
  		compatible = "silergy,syr828";
  		reg = <0x41>;
  		fcs,suspend-voltage-selector = <1>;
@@ -261,31 +296,25 @@ index 7de684ed1edc..4e72b428ba5d 100644
  		pinctrl-names = "default";
  		pinctrl-0 = <&vsel2_pin>;
  		regulator-name = "vdd_gpu";
-@@ -990,15 +1042,15 @@ &pmu_io_domains {
- };
+@@ -1026,12 +1075,12 @@ vsel2_pin: vsel2-pin {
+ 		};
+ 	};
  
- &pinctrl {
--	es8316 {
--		hp_det_pin: hp-det-pin {
--				rockchip,pins = <0 RK_PB0 RK_FUNC_GPIO &pcfg_pull_up>;
--		};
-+        es8316 {
-+			hp_det_pin: hp-det-pin {
-+					rockchip,pins = <0 RK_PB0 RK_FUNC_GPIO &pcfg_pull_up>;
-+			};
+-        sdcard {
+-                sdmmc0_pwr_h: sdmmc0-pwr-h {
+-                        rockchip,pins = <0 RK_PA1 RK_FUNC_GPIO &pcfg_pull_none>;
+-                };
++	sdcard {
++		sdmmc0_pwr_h: sdmmc0-pwr-h {
++			rockchip,pins = <0 RK_PA1 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
  
--		spk_en_pin: spk-en-pin {
--			rockchip,pins = <1 RK_PC5 RK_FUNC_GPIO &pcfg_pull_down>;
--		};
--	};
-+			spk_en_pin: spk-en-pin {
-+				rockchip,pins = <1 RK_PC5 RK_FUNC_GPIO &pcfg_pull_down>;
-+			};
-+        };
+-        };
++	};
  
-         i2s1 {
-                 i2s_8ch_mclk_pin: i2s-8ch-mclk-pin {
-@@ -1189,8 +1241,7 @@ &usbdrd3_0 {
+ 	sdio-pwrseq {
+ 		wifi_enable_h: wifi-enable-h {
+@@ -1189,8 +1238,7 @@ &usbdrd3_0 {
  
  &usbdrd_dwc3_0 {
  	status = "okay";
