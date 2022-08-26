@@ -1,0 +1,130 @@
+For more information visit the zdoom wiki:
+https://zdoom.org/wiki/Raze#Supported_games
+
+Please note, the game files are case sensitive so if you are having an issue please make sure they are the correct case.
+
+********************
+
+Blood:
+
+BLOOD.INI
+BLOOD.RFF
+GUI.RFF
+SOUNDS.RFF
+SURFACE.DAT
+TILES000.ART - TILES017.ART
+VOXEL.DAT
+
+(Optional) GTI.SMK (Splash Movie)
+(Optional) LOGO.SMK (Splash Movie)
+(Optional) Music Files: blood02.ogg - blood09.ogg (in same folder or "music" sub-folder)
+
+********************
+
+Blood: Cryptic Passage:
+
+This needs to be installed in a separate folder from Blood.
+
+CRYPTIC.INI (renamed to BLOOD.INI)
+BLOOD.RFF
+CP*.MAP
+CPART07.AR_
+CPART15.AR_
+CRYPTIC.SMK
+CRYPTIC.WAV
+GUI.RFF
+SOUNDS.RFF
+SURFACE.DAT
+TILES000.ART - TILES017.ART
+VOXEL.DAT
+
+(Optional) GTI.SMK (Splash Movie)
+(Optional) LOGO.SMK (Splash Movie)
+(Optional) Music Files: blood02.ogg - blood09.ogg (in same folder or "music" sub-folder)
+
+********************
+
+Duke Nukem 3D:
+
+DUKE3D.GRP (For proper support for World Tour's extra features requires the whole game installation)
+
+********************
+
+The following Duke games must be in separate folders with their own copy of DUKE3D.GRP. Not all versions of DUKE3D.GRP are compatible so if it crashes on start or just loads the standard Duke Nukem 3D game try it with a different DUKE3D.GRP. I experienced the best compatibility with the DUKE3D.GRP that had a CRC-32 File Checksum of fd3dcff1. You can check the checksum online at: https://emn178.github.io/online-tools/crc32_checksum.html
+
+Duke It Out in D.C.:
+
+DUKEDC.GRP (Best compatibility with CRC-32 File Checksum of a8cf80da)
+
+Duke: Nuclear Winter:
+
+NWINTER.GRP (Best compatibility with CRC-32 File Checksum of f1cae8e4)
+
+Duke Caribbean: Life's a Beach:
+
+VACATION.GRP (Best compatibility with CRC-32 File Checksum of 18f01c5b)
+
+********************
+
+Exhumed/PowerSlave:
+
+BOOK.MOV
+STUFF.DAT
+DEMO.VCR
+
+(Optional) Music Files: track02.ogg - track19.ogg (in same folder or "music" sub-folder, can also be labeled exhumed02 to exhumed19.ogg)
+
+********************
+
+NAM:
+
+GAME.CON
+NAM.GRP
+
+********************
+
+Redneck Rampage:
+
+REDNECK.GRP
+
+(Optional) Music Files: track02.ogg - track09.ogg (in same folder or "music" sub-folder)
+
+(Optional) Route66 files in same folder: ASYAMB.VOC, BUBBA66.CON, DEFS66.CON, END66.ANM, END66.VOC, GAME66.CON, GATOR66.CON, G_BITE.VOC, G_SIT.VOC, NEON.VOC, PIG66.CON, TILESA66.ART, TILESB66.ART, TURD66.ANM, TURD66.VOC, USER66.CON
+Route66 files in ROUTE66 sub-folder: ALIEN.MAP, BIGFOOT.MAP,BREWERY.MAP,CAMPY.MAP, CARNIVAL.MAP,COFFIN.MAP,FLEA.MAP,GAS.MAP,HOOVRDAM.MAP,MINIGOLF.MAP,RANCH.MAP,SLAUGHTR.MAP, START.MAP, TRUCKSTP.MAP
+
+********************
+
+Redneck Rampage Rides Again:
+
+REDNECK.GRP (different file but shares the same name as the first game)
+
+(Optional) redint.mve (Intro movie for the game)
+(Optional) Music Files: track02.ogg - track010.ogg (in same folder or "music" sub-folder)
+
+********************
+
+Shadow Warriors:
+
+SW.GRP
+
+********************
+
+The following Shadow Warrior games must be in separate folders with their own copy of SW.GRP.
+
+Twin Dragon:
+
+TD.GRP or TWINDRAG.GRP
+
+Wanton Destruction:
+
+WT.GRP or WANTDEST.GRP
+
+********************
+
+World War II GI:
+
+WW2GI.GRP
+
+Platoon Leader:
+
+PLATOONL.DAT
